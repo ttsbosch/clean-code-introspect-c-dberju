@@ -51,38 +51,20 @@ TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
     // resultValue should remain unchanged if conversion fails
 }
 
-class CsvReadTest : public ::testing::Test {
-protected:
-    // Helper function to create a temporary file with given content
-    void createTempFile(const char* filename, const char* content) {
-        FILE *file = fopen(filename, "w");
-        if (file) {
-            fputs(content, file);
-            fclose(file);
-        }
-    }
-
-    // Helper function to delete the temporary file
-    void deleteTempFile(const char* filename) {
-        remove(filename);
-    }
-};
 
 TEST_F(CsvReadTest, ReadValidCsvFile) {
-    const char* filename = "test_valid.csv";
+    const char* filename = "trades.txt";
     const char* content = "INRDOL,500,1000\nDOLINR,600,2000\nINRLAR,200,3000\n";
-    //createTempFile(filename, content);
-
+    
     FILE *file = fopen(filename, "rw");
-            if (file) {
+    if (file) {
             fputs(content, file);
-            }
+    }
     ASSERT_NE(file, nullptr);
 
     //char **lines = ReadTradeDataFromCsv(file);
 
     fclose(file);
-    deleteTempFile(filename);
 
     //ASSERT_NE(lines, nullptr);
 
