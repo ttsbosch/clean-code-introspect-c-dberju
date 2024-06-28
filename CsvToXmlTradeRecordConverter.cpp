@@ -26,7 +26,7 @@ char **ReadTradeDataFromCsv(FILE *filePointer)
         // Allocate memory for the line
         lines[count] = (char *)malloc((strlen(line) + 1) * sizeof(char));
         memcpy(lines[count] , line, strlen(line));
-        //printf("%s\n",lines[count]);
+        printf("%s\n",lines[count]);
         count++;
     }
 
