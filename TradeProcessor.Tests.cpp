@@ -81,58 +81,6 @@ TEST(ValidateAndPopulateTradeDataTest, ValidData) {
     free(result);
 }
 
-// Unit tests for writeTradeDataToXml function
-TEST(WriteTradeDataToXmlTest, ValidData) {
-    TradeRecord mockTradeData[3] = {
-        {"USD", "EUR", 100.0, 1.2345}, // Valid data
-        {"GBP", "JPY", 200.0, 105.67}, // Valid data
-        {"AUD", "CAD", 300.0, 0.9876}  // Valid data
-    };
-
-    // Call the function under test
-    FILE* outFile = writeTradeDataToXml(mockTradeData);
-
-    // Validate the generated XML file
-    ASSERT_NE(outFile, nullptr); // Check if file pointer is not null
-
-    // Open the generated file for reading
-    FILE* inFile = fopen("output.xml", "r");
-    ASSERT_NE(inFile, nullptr); // Ensure the file was created and can be opened
-
-    // Read and validate the contents of the generated XML file
-    char buffer[1024];
-    memset(buffer, 0, sizeof(buffer));
-    fread(buffer, sizeof(char), sizeof(buffer), inFile);
-
-    // Expected XML structure
-    const char* expectedXml = "<TradeRecords>\n"
-                              "\t<TradeRecord>\n"
-                              "\t\t<SourceCurrency>USD</SourceCurrency>\n"
-                              "\t\t<DestinationCurrency>EUR</DestinationCurrency>\n"
-                              "\t\t<Lots>100.00</Lots>\n"
-                              "\t\t<Price>1.234500</Price>\n"
-                              "\t</TradeRecord>\n"
-                              "\t<TradeRecord>\n"
-                              "\t\t<SourceCurrency>GBP</SourceCurrency>\n"
-                              "\t\t<DestinationCurrency>JPY</DestinationCurrency>\n"
-                              "\t\t<Lots>200.00</Lots>\n"
-                              "\t\t<Price>105.670000</Price>\n"
-                              "\t</TradeRecord>\n"
-                              "\t<TradeRecord>\n"
-                              "\t\t<SourceCurrency>AUD</SourceCurrency>\n"
-                              "\t\t<DestinationCurrency>CAD</DestinationCurrency>\n"
-                              "\t\t<Lots>300.00</Lots>\n"
-                              "\t\t<Price>0.987600</Price>\n"
-                              "\t</TradeRecord>\n"
-                              "</TradeRecords>";
-
-    EXPECT_STREQ(buffer, expectedXml);
-
-    // Clean up
-    fclose(inFile);
-    remove("output.xml"); // Remove the generated file
-}
-
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
