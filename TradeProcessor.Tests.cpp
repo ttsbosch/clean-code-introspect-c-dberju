@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 #include "Converters.hpp"
+#include "CsvToXmlTradeRecordConverter.hpp"
+
 TEST(ConvertStringToIntTest, ValidInput) {
     int resultValue;
     const char* validInput = "123";
