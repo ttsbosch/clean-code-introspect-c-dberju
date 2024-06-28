@@ -51,33 +51,35 @@ TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
     // resultValue should remain unchanged if conversion fails
 }
 
-TEST(MapCsvLineDataToTradeDataTest, ValidCsvLines) {
-    char* mockCsvData[3] = {
-        "USD,199,1.2345",
-        "GBP,111,105.67",
-        "AUD,100,0.9876"
+TEST(ValidateAndPopulateTradeDataTest, ValidData) {
+    TradeDataInString mockTradeData[3] = {
+        {"USDEUR", "100", "1.2345"}, // Valid data
+        {"GBPJPY", "200", "105.67"}, // Valid data
+        {"AUDCAD", "300", "0.9876"}  // Valid data
     };
 
-    TradeDataInString* result = mapCsvLineDataToTradeData(mockCsvData);
+    TradeRecord* result = validateAndPopulateTradeData(mockTradeData);
 
-    // Validate the first line
-    EXPECT_STREQ(result[0].tradeCurrencies, "USD");
-    EXPECT_STREQ(result[0].tradeAmount, "199");
-    EXPECT_STREQ(result[0].tradePrice, "1.2345");
+    // Validate the first trade record
+    EXPECT_STREQ(result[0].SourceCurrency, "USD");
+    EXPECT_STREQ(result[0].DestibationCurrency, "EUR");
+    EXPECT_FLOAT_EQ(result[0].Lots, 100.0);
+    EXPECT_DOUBLE_EQ(result[0].Price, 1.2345);
 
-    // Validate the second line
-    EXPECT_STREQ(result[1].tradeCurrencies, "GBP");
-    EXPECT_STREQ(result[1].tradeAmount, "111");
-    EXPECT_STREQ(result[1].tradePrice, "105.67");
+    // Validate the second trade record
+    EXPECT_STREQ(result[1].SourceCurrency, "GBP");
+    EXPECT_STREQ(result[1].DestibationCurrency, "JPY");
+    EXPECT_FLOAT_EQ(result[1].Lots, 200.0);
+    EXPECT_DOUBLE_EQ(result[1].Price, 105.67);
 
-    // Validate the third line
-    EXPECT_STREQ(result[2].tradeCurrencies, "AUD");
-    EXPECT_STREQ(result[2].tradeAmount, "100");
-    EXPECT_STREQ(result[2].tradePrice, "0.9876");
+    // Validate the third trade record
+    EXPECT_STREQ(result[2].SourceCurrency, "AUD");
+    EXPECT_STREQ(result[2].DestibationCurrency, "CAD");
+    EXPECT_FLOAT_EQ(result[2].Lots, 300.0);
+    EXPECT_DOUBLE_EQ(result[2].Price, 0.9876);
 
-    free(result);
+    //free(result);
 }
-
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
