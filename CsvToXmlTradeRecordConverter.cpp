@@ -7,12 +7,6 @@
 #include "Converters.hpp"
 #include "TradeRecord.hpp"
 
-typedef struct 
-{
-    char tradeCurrencies[100];
-    char tradeAmount[100];
-    char tradePrice[100];
-}TradeDataInString;
 
 char **ReadTradeDataFromCsv(FILE *filePointer)
 {
