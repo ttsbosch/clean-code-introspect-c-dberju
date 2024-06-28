@@ -1,7 +1,13 @@
 #include "gtest/gtest.h"
-Test(TestConverter, tryToConvertStringtoInt)
-{
-  int result_val;
-  char *string = "Bosch";
-  ASSERT_EQ(1,tryToConvertStringtoInt(string,result_val));
+
+TEST(ConvertStringToIntTest, ValidInput) {
+    int resultValue;
+    const char* validInput = "123";
+    ASSERT_EQ(tryToConvertStringtoInt(validInput, &resultValue), 1);
+    ASSERT_EQ(resultValue, 123);
+}
+
+int main(int argc, char** argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
