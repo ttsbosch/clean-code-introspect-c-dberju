@@ -36,16 +36,16 @@ TEST(ConvertStringToIntTest, TrailingCharacters) {
 }
 
 TEST(tryToConvertStringtoDoubleTest, ValidInput) {
-    int resultValue;
+    double resultValue;
     const char* validInput = "123.001";
     ASSERT_EQ(tryToConvertStringtoDouble(validInput, &resultValue), 1);
     ASSERT_EQ(resultValue, 123.001);
 }
 
 TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
-    int resultValue;
+    double resultValue;
     const char* invalidInput = "abc";
-    ASSERT_EQ(tryToConvertStringtoDoubleTest(invalidInput, &resultValue), 0);
+    ASSERT_EQ(tryToConvertStringtoDouble(invalidInput, &resultValue), 0);
     // resultValue should remain unchanged if conversion fails
 }
 
