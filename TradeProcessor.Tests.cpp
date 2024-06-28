@@ -35,6 +35,13 @@ TEST(ConvertStringToIntTest, TrailingCharacters) {
     ASSERT_EQ(resultValue, 789);
 }
 
+TEST(tryToConvertStringtoDoubleTest, ValidInput) {
+    int resultValue;
+    const char* validInput = "123.001";
+    ASSERT_EQ(tryToConvertStringtoDouble(validInput, &resultValue), 1);
+    ASSERT_EQ(resultValue, 123.001);
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
