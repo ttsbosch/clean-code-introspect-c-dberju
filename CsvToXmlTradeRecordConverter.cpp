@@ -6,7 +6,7 @@
 #define NUMBER_OF_LINES_IN_CSV 3
 #include "Converters.hpp"
 #include "TradeRecord.hpp"
-
+#include "CsvToXmlTradeRecordConverter.hpp"
 
 char **ReadTradeDataFromCsv(FILE *filePointer)
 {
