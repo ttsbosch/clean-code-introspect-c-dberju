@@ -52,7 +52,7 @@ TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
 }
 
 TEST(MapCsvLineDataToTradeDataTest, ValidCsvLines) {
-    char* mockCsvData[NUMBER_OF_LINES_IN_CSV] = {
+    char* mockCsvData[3] = {
         "USD,199,1.2345",
         "GBP,111,105.67",
         "AUD,100,0.9876"
