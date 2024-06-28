@@ -51,34 +51,33 @@ TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
     // resultValue should remain unchanged if conversion fails
 }
 
+TEST(MapCsvLineDataToTradeDataTest, ValidCsvLines) {
+    char* mockCsvData[NUMBER_OF_LINES_IN_CSV] = {
+        "USD,199,1.2345",
+        "GBP,111,105.67",
+        "AUD,100,0.9876"
+    };
 
-TEST(CsvReadTest, ReadValidCsvFile) {
-    const char* filename = "trades.txt";
-    //const char* content = "INRDOL,500,1000\nDOLINR,600,2000\nINRLAR,200,3000\n";
-    
-    FILE *file = fopen(filename, "r");
-    //if (file) {
-    //        fputs(content, file);
-    //}
-    //ASSERT_NE(file, nullptr);
+    TradeDataInString* result = mapCsvLineDataToTradeData(mockCsvData);
 
-    char **lines = ReadTradeDataFromCsv(file);
+    // Validate the first line
+    EXPECT_STREQ(result[0].tradeCurrencies, "USD");
+    EXPECT_STREQ(result[0].tradeAmount, "199");
+    EXPECT_STREQ(result[0].tradePrice, "1.2345");
 
-    fclose(file);
+    // Validate the second line
+    EXPECT_STREQ(result[1].tradeCurrencies, "GBP");
+    EXPECT_STREQ(result[1].tradeAmount, "111");
+    EXPECT_STREQ(result[1].tradePrice, "105.67");
 
-    //ASSERT_NE(lines, nullptr);
+    // Validate the third line
+    EXPECT_STREQ(result[2].tradeCurrencies, "AUD");
+    EXPECT_STREQ(result[2].tradeAmount, "100");
+    EXPECT_STREQ(result[2].tradePrice, "0.9876");
 
-    // Check if the lines are read correctly
-    EXPECT_STREQ(lines[0], "INRDOL,500,1000\n");
-    EXPECT_STREQ(lines[1], "DOLINR,600,2000\n");
-    EXPECT_STREQ(lines[2], "INRLAR,200,3000\n");
-
-    // Free allocated memory
-    //for (int i = 0; lines[i] != NULL; ++i) {
-    //    free(lines[i]);
-    //}
-    //free(lines);
+    free(result);
 }
+
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
