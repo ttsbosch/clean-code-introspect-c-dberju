@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-Test(, tryToConvertStringtoInt)
+Test(TestConverter, tryToConvertStringtoInt)
 {
   int result_val;
   char *string = "Bosch";
