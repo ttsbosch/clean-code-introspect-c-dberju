@@ -72,21 +72,23 @@ TradeRecord* validateAndPopulateTradeData(TradeDataInString *tradeData)
 
     for(int index = 0 ; index < NUMBER_OF_LINES_IN_CSV ; index++ )
     {
-        if (strlen(tradeData[index].tradeCurrencies) != 6) {
-            fprintf(stderr, "WARN: Trade currencies malformed: '%s'\n", tradeData[index].tradeCurrencies);
-            continue;
-        }
+        //if (strlen(tradeData[index].tradeCurrencies) != 6) {
+        //    fprintf(stderr, "WARN: Trade currencies malformed: '%s'\n", tradeData[index].tradeCurrencies);
+         //   continue;
+        //}
 
         int tradeAmount;
-        if (!tryToConvertStringtoInt(tradeData[index].tradeAmount, &tradeAmount)) {
-            fprintf(stderr, "WARN: Trade amount  not a valid integer: '%s'\n", tradeData[index].tradeAmount);
-            continue;
-        }
+        tryToConvertStringtoInt(tradeData[index].tradeAmount, &tradeAmount);
+        //if (!tryToConvertStringtoInt(tradeData[index].tradeAmount, &tradeAmount)) {
+        //    fprintf(stderr, "WARN: Trade amount  not a valid integer: '%s'\n", tradeData[index].tradeAmount);
+        //    continue;
+        //}
 
         double tradePrice;
-        if (!tryToConvertStringtoDouble(tradeData[index].tradePrice, &tradePrice)) {
-            fprintf(stderr, "WARN: Trade price  not a valid decimal: '%s'\n", tradeData[index].tradePrice);
-        }
+        tryToConvertStringtoDouble(tradeData[index].tradePrice, &tradePrice);
+        //if (!tryToConvertStringtoDouble(tradeData[index].tradePrice, &tradePrice)) {
+         //   fprintf(stderr, "WARN: Trade price  not a valid decimal: '%s'\n", tradeData[index].tradePrice);
+        //}
     
         strncpy(tradeRecord[index].SourceCurrency, tradeData[index].tradeCurrencies, 3);
         strncpy(tradeRecord[index].DestibationCurrency, tradeData[index].tradeCurrencies + 3, 3);
