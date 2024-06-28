@@ -71,9 +71,12 @@ protected:
 TEST_F(CsvReadTest, ReadValidCsvFile) {
     const char* filename = "test_valid.csv";
     const char* content = "INRDOL,500,1000\nDOLINR,600,2000\nINRLAR,200,3000\n";
-    createTempFile(filename, content);
+    //createTempFile(filename, content);
 
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(filename, "w");
+            if (file) {
+            fputs(content, file);
+            }
     ASSERT_NE(file, nullptr);
 
     char **lines = ReadTradeDataFromCsv(file);
