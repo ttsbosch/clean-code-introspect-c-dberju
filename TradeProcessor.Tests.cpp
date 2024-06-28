@@ -78,7 +78,7 @@ TEST(ValidateAndPopulateTradeDataTest, ValidData) {
     EXPECT_FLOAT_EQ(result[2].Lots, 300.0);
     EXPECT_DOUBLE_EQ(result[2].Price, 0.9876);
 
-    //free(result);
+    free(result);
 }
 
 int main(int argc, char** argv) {
