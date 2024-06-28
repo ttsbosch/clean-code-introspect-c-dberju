@@ -2,7 +2,17 @@
 #define CSVTOXMLTRADERECORDCONVERTER_HPP
 
 #include <stdio.h>
+typedef struct 
+{
+    char tradeCurrencies[100];
+    char tradeAmount[100];
+    char tradePrice[100];
+}TradeDataInString;
 
-void convertDataFromCsvToXml(FILE* stream);
+char **ReadTradeDataFromCsv(FILE *filePointer);
+TradeDataInString* mapCsvLineDataToTradeData(char **lineInFile);
+TradeRecord* validateAndPopulateTradeData(TradeDataInString *tradeData);
+FILE * writeTradeDataToXml(TradeRecord *tradeRecord);
+
 
 #endif
