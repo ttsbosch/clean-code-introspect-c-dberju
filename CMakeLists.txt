@@ -20,7 +20,6 @@ add_executable(
   cleancoder
   Converters.cpp
   CsvToXmlTradeRecordConverter.cpp
-  StringHelper.cpp
   TradeProcessor.Tests.cpp
 )
 target_link_libraries(
