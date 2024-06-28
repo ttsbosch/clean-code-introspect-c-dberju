@@ -49,6 +49,50 @@ TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
     // resultValue should remain unchanged if conversion fails
 }
 
+class CsvReadTest : public ::testing::Test {
+protected:
+    // Helper function to create a temporary file with given content
+    void createTempFile(const char* filename, const char* content) {
+        FILE *file = fopen(filename, "w");
+        if (file) {
+            fputs(content, file);
+            fclose(file);
+        }
+    }
+
+    // Helper function to delete the temporary file
+    void deleteTempFile(const char* filename) {
+        remove(filename);
+    }
+};
+
+TEST_F(CsvReadTest, ReadValidCsvFile) {
+    const char* filename = "test_valid.csv";
+    const char* content = "INRDOL,500,1000\nDOLINR,600,2000\nINRLAR,200,3000\n";
+    createTempFile(filename, content);
+
+    FILE *file = fopen(filename, "r");
+    ASSERT_NE(file, nullptr);
+
+    char **lines = ReadTradeDataFromCsv(file);
+
+    fclose(file);
+    deleteTempFile(filename);
+
+    ASSERT_NE(lines, nullptr);
+
+    // Check if the lines are read correctly
+    EXPECT_STREQ(lines[0], "INRDOL,500,1000\n");
+    EXPECT_STREQ(lines[1], "DOLINR,600,2000\n");
+    EXPECT_STREQ(lines[2], "INRLAR,200,3000\n");
+
+    // Free allocated memory
+    for (int i = 0; lines[i] != NULL; ++i) {
+        free(lines[i]);
+    }
+    free(lines);
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
