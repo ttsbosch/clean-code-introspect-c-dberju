@@ -2,6 +2,7 @@
 #define CSVTOXMLTRADERECORDCONVERTER_HPP
 
 #include <stdio.h>
+#include "TradeRecord.hpp"
 typedef struct 
 {
     char tradeCurrencies[100];
