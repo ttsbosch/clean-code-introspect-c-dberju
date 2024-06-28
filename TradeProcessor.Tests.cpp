@@ -42,6 +42,13 @@ TEST(tryToConvertStringtoDoubleTest, ValidInput) {
     ASSERT_EQ(resultValue, 123.001);
 }
 
+TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
+    int resultValue;
+    const char* invalidInput = "abc";
+    ASSERT_EQ(tryToConvertStringtoDoubleTest(invalidInput, &resultValue), 0);
+    // resultValue should remain unchanged if conversion fails
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
