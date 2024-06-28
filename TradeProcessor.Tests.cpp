@@ -52,7 +52,7 @@ TEST(tryToConvertStringtoDoubleTest, InvalidInput) {
 }
 
 
-TEST_F(CsvReadTest, ReadValidCsvFile) {
+TEST(CsvReadTest, ReadValidCsvFile) {
     const char* filename = "trades.txt";
     //const char* content = "INRDOL,500,1000\nDOLINR,600,2000\nINRLAR,200,3000\n";
     
